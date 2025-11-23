@@ -3,7 +3,6 @@ name: Docker Container Build
 on:
   workflow_dispatch:
   push:
-    paths: [ 'Dockerfile', 'docker-compose.yml' ]
 
 permissions:
   contents: read
