@@ -20,15 +20,15 @@ RUN ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # Asterisk のソースコードをダウンロード
+WORKDIR /tmp/
 RUN wget -O asterisk.tgz "http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-${ASTERISK_VERSION}.tar.gz";
 RUN wget -O asterisk.tgz.asc "http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-${ASTERISK_VERSION}.tar.gz.asc";
 RUN gpg --keyserver keyserver.ubuntu.com --recv-keys ${ASTERISK_TARBALL_ASCII};
 RUN gpg --verify asterisk.tgz.asc asterisk.tgz;
-RUN tar xf asterisk.tgz -C /tmp && mv /tmp/asterisk* asterisk
-
-WORKDIR /tmp/asterisk
+RUN tar xf asterisk.tgz -C /tmp && mv /tmp/asterisk* /tmp/asterisk
 
 # コンパイル
+WORKDIR /tmp/asterisk
 RUN ./contrib/scripts/install_prereq install;
 RUN ./configure --with-jansson-bundled;
 RUN make menuselect-tree;
