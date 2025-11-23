@@ -14,6 +14,9 @@ RUN apt-get update && apt-get -y upgrade;
 RUN apt-get install -y wget;
 RUN apt-get install -y gpg;
 RUN apt-get install -y tzdata;
+RUN apt-get install -y build-essential;
+RUN apt-get install -y ca-certificates;
+RUN apt-get install -y lsb-release;
 
 # TZ-Data
 RUN ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
