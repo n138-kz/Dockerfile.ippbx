@@ -1,0 +1,29 @@
+services:
+  asterisk-core:
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Asia/Tokyo
+      DEBIAN_FRONTEND: noninteractive
+      LANG: C
+      LANGUAGE: C
+      LC_ALL: C
+    build:
+      context: asterisk-core/
+    restart: on-failure
+    ports:
+      # 5060/both SIP
+      - ${port_sip:-5060}:5060/tcp
+      - ${port_sip:-5060}:5060/udp
+    tty: true
+    volumes:
+      - type: bind
+        source: ./
+        target: /media
+        read_only: true
+    logging:
+      driver: json-file
+      options:
+        max-size: "1024k"
+        max-file: "10"
+
