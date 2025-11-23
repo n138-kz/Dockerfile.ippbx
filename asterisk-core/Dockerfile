@@ -33,10 +33,10 @@ RUN for i in {0..9}; do echo ''; done
 
 # コンパイル
 WORKDIR /tmp/asterisk
-RUN $(pwd)/contrib/scripts/install_prereq install;
-RUN $(pwd)/configure --with-jansson-bundled;
-RUN make menuselect-tree;
-RUN $(pwd)/menuselect/menuselect --enable CORE-SOUNDS-JA-WAV menuselect.makeopts;
+RUN ./contrib/scripts/install_prereq install;
+RUN ./configure --with-jansson-bundled;
+RUN make menuselect;
+RUN ./menuselect/menuselect --enable CORE-SOUNDS-JA-WAV menuselect.makeopts;
 RUN make -j4;
 RUN make install;
 RUN make samples;
