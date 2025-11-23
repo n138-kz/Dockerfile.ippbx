@@ -15,6 +15,8 @@ services:
       # 5060/both SIP
       - ${port_sip:-5060}:5060/tcp
       - ${port_sip:-5060}:5060/udp
+      # 10000-20000:udp RTP (audio)
+      - ${port_rtp:-10000-20000}:10000-20000/udp
     tty: true
     volumes:
       - type: bind
