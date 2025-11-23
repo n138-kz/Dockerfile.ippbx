@@ -25,7 +25,7 @@ RUN wget -O asterisk.tgz "http://downloads.asterisk.org/pub/telephony/asterisk/a
 RUN wget -O asterisk.tgz.asc "http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-${ASTERISK_VERSION}.tar.gz.asc";
 RUN gpg --keyserver keyserver.ubuntu.com --recv-keys ${ASTERISK_TARBALL_ASCII};
 RUN gpg --verify asterisk.tgz.asc asterisk.tgz;
-RUN set -x && tar xf asterisk.tgz -C /tmp && mv /tmp/asterisk* /tmp/asterisk
+RUN set -x && tar xf asterisk.tgz -C /tmp && mv /tmp/asterisk-* /tmp/asterisk
 
 # コンパイル
 WORKDIR /tmp/asterisk
