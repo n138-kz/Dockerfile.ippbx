@@ -29,10 +29,10 @@ RUN tar xf asterisk.tgz -C /tmp && mv /tmp/asterisk-* /tmp/asterisk
 
 # コンパイル
 WORKDIR /tmp/asterisk
-RUN ./contrib/scripts/install_prereq install;
-RUN ./configure --with-jansson-bundled;
+RUN $(pwd)/contrib/scripts/install_prereq install;
+RUN $(pwd)/configure --with-jansson-bundled;
 RUN make menuselect-tree;
-RUN ./menuselect/menuselect --enable CORE-SOUNDS-JA-WAV menuselect.makeopts;
+RUN $(pwd)/menuselect/menuselect --enable CORE-SOUNDS-JA-WAV menuselect.makeopts;
 RUN make -j4;
 RUN make install;
 RUN make samples;
