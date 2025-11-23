@@ -26,6 +26,7 @@ RUN wget -O asterisk.tgz.asc "http://downloads.asterisk.org/pub/telephony/asteri
 RUN gpg --keyserver keyserver.ubuntu.com --recv-keys ${ASTERISK_TARBALL_ASCII};
 RUN gpg --verify asterisk.tgz.asc asterisk.tgz;
 RUN tar xf asterisk.tgz -C /tmp && mv /tmp/asterisk-* /tmp/asterisk
+RUN for i in {0..9}; do echo ''; done
 
 # コンパイル
 WORKDIR /tmp/asterisk
@@ -36,4 +37,4 @@ RUN $(pwd)/menuselect/menuselect --enable CORE-SOUNDS-JA-WAV menuselect.makeopts
 RUN make -j4;
 RUN make install;
 RUN make samples;
-
+RUN for i in {0..9}; do echo ''; done
