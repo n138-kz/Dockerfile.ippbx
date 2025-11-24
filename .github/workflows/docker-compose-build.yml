@@ -29,7 +29,7 @@ jobs:
     - name: Create config directory
       run: mkdir conf.d
 
-    - name: Create null config
+    - name: Create null config (asterisk)
       run: touch conf.d/{pjsip.conf,extensions.conf,rtp.conf}
 
     - name: Print the Orchestration config
