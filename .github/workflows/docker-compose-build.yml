@@ -41,6 +41,8 @@ jobs:
         name: "orchestration-config.yml"
         path: ./debug
 
+    - run: pwd;tree
+
     - name: Build check the Orchestration config
       run: docker compose build --no-cache --check
 
