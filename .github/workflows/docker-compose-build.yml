@@ -41,6 +41,10 @@ jobs:
     - run: docker compose exec -it asterisk-core pwd
     - run: docker compose exec -it asterisk-core ls -lh
     - run: docker compose exec -it asterisk-core tree
+    - run: docker compose exec -it asterisk-core ls -lh /etc
+    - run: docker compose exec -it asterisk-core tree /etc
+    - run: docker compose exec -it asterisk-core ls -lh /etc/asterisk
+    - run: docker compose exec -it asterisk-core tree /etc/asterisk
 
     - run: pwd
       if: always()
