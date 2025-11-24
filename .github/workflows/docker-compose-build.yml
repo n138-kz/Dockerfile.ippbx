@@ -87,4 +87,10 @@ jobs:
 
     - name: Print logs
       if: always()
-      run: docker compose logs
+      run: docker compose logs | tee orchestration-initrun.log
+
+    - name: Upload Debug file
+      uses: actions/upload-artifact@v4
+      with:
+        name: "orchestration-build.log"
+        path: ./orchestration-initrun.log
