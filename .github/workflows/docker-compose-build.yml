@@ -29,6 +29,9 @@ jobs:
     - name: Create config directory
       run: mkdir conf.d
 
+    - name: Create config directory (asterisk)
+      run: mkdir -p conf.d/asterisk
+
     - name: Create null config (asterisk)
       run: touch conf.d/asterisk/{pjsip.conf,extensions.conf,rtp.conf}
 
