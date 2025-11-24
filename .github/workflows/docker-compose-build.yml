@@ -86,6 +86,9 @@ jobs:
 
     - run: pwd;
       if: always()
+    
+    - run: tree
+      if: always()
 
     - name: Wait 5s
       if: always()
