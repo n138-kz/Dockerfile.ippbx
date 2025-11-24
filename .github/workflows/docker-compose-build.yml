@@ -25,6 +25,7 @@ jobs:
 
     - run: alias ddate='echo "$(date) ($(date +%s))"'
     - run: alias docker='ddate; docker'
+    - run: alias sleep='ddate; sleep'
 
     - name: Create test .env
       run: touch .env
