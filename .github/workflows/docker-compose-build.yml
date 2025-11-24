@@ -27,13 +27,13 @@ jobs:
       run: touch .env
 
     - name: Create config directory
-      run: mkdir conf.d
+      run: test -d conf.d || mkdir -p conf.d
 
     - name: Create config directory (asterisk)
-      run: mkdir -p conf.d/asterisk
+      run: test -d conf.d/asterisk || mkdir -p conf.d/asterisk
 
     - name: Create config directory (systemd)
-      run: mkdir -p conf.d/systemd/system
+      run: test -d conf.d/systemd/system || mkdir -p conf.d/systemd/system
 
     - name: Create null config (asterisk)
       run: touch conf.d/asterisk/{pjsip.conf,extensions.conf,rtp.conf}
