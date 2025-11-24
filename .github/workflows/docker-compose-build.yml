@@ -33,7 +33,13 @@ jobs:
       run: touch conf.d/{pjsip.conf,extensions.conf,rtp.conf}
 
     - name: Print the Orchestration config
-      run: docker compose config
+      run: docker compose config | tee debug
+
+    - name: Upload Debug file
+      uses: actions/upload-artifact@v4
+      with:
+        name: "orchestration-config.yml"
+        path: ./debug
 
     - name: Build check the Orchestration config
       run: docker compose build --no-cache --check
