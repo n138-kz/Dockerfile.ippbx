@@ -32,8 +32,8 @@ jobs:
     - name: Test run
       run: docker compose up -d
 
-    - if: always()
-      run: pwd
+    - run: pwd
+      if: always()
 
     - name: Wait 5s
       run: sleep 5
