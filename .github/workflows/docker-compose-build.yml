@@ -30,7 +30,7 @@ jobs:
       run: mkdir conf.d
 
     - name: Create null config (asterisk)
-      run: touch conf.d/{pjsip.conf,extensions.conf,rtp.conf}
+      run: touch conf.d/asterisk/{pjsip.conf,extensions.conf,rtp.conf}
 
     - name: Print the Orchestration config
       run: docker compose config | tee debug
