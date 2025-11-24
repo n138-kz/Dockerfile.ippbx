@@ -39,13 +39,13 @@ jobs:
       run: touch conf.d/asterisk/{pjsip.conf,extensions.conf,rtp.conf}
 
     - name: Print the Orchestration config
-      run: docker compose config | tee debug
+      run: docker compose config | tee orchestration-config.yml
 
     - name: Upload Debug file
       uses: actions/upload-artifact@v4
       with:
         name: "orchestration-config.yml"
-        path: ./debug
+        path: ./orchestration-config.yml
 
     - run: pwd;tree
 
