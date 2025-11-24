@@ -23,6 +23,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - run: alias ddate='echo "$(date) ($(date +%s))"'
+
     - name: Create test .env
       run: touch .env
 
