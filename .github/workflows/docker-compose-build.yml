@@ -29,6 +29,9 @@ jobs:
     - name: Create config directory
       run: mkdir conf.d
 
+    - name: Create null config
+      run: touch conf.d/{pjsip.conf,extensions.conf,rtp.conf}
+
     - name: Build the Image
       run: docker compose build --no-cache
 
