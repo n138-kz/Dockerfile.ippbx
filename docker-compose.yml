@@ -24,6 +24,10 @@ services:
         source: ./
         target: /media
         read_only: true
+      - type: bind
+        source: ./conf.d
+        target: /media/conf.d
+        read_only: false
     logging:
       driver: json-file
       options:
