@@ -9,6 +9,8 @@ ARG LANGUAGE=C
 ARG ASTERISK_VERSION=23.1.0
 ARG ASTERISK_TARBALL_ASCII=F2FC93DB7587BD1FB49E045A5D984BE337191CE7
 
+RUN test -d /media/conf.d
+
 # ライブラリの更新とインストール
 RUN apt-get update && apt-get -y upgrade;
 RUN apt-get install -y wget;
