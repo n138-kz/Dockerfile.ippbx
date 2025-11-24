@@ -1,0 +1,36 @@
+services:
+  asterisk-core:
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Asia/Tokyo
+      DEBIAN_FRONTEND: noninteractive
+      LANG: C
+      LANGUAGE: C
+      LC_ALL: C
+    build:
+      context: .
+      dockerfile: asterisk-core/Dockerfile
+    restart: on-failure
+    ports:
+      # 5060/both SIP
+      - ${port_sip:-5060}:5060/tcp
+      - ${port_sip:-5060}:5060/udp
+      # 10000-20000:udp RTP (audio)
+      - ${port_rtp:-10000-20000}:10000-20000/udp
+    tty: true
+    volumes:
+      - type: bind
+        source: ./
+        target: /media
+        read_only: true
+      - type: bind
+        source: ./conf.d
+        target: /media/conf.d
+        read_only: false
+    logging:
+      driver: json-file
+      options:
+        max-size: "1024k"
+        max-file: "10"
+

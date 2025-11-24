@@ -1,0 +1,116 @@
+name: Docker Container Build
+
+on:
+  workflow_dispatch:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  send_github_context:
+    uses: n138-kz/n138-kz/.github/workflows/github-act_send_github_context.yml@main
+    secrets: inherit # pass all secrets
+
+  docker_login:
+    uses: n138-kz/n138-kz/.github/workflows/github-act_docker_login.yml@main
+    secrets: inherit # pass all secrets
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - run: alias ddate='echo "$(date) ($(date +%s))"'
+    - run: alias docker='ddate; docker'
+    - run: alias sleep='ddate; sleep'
+
+    - name: Create test .env
+      run: touch .env
+
+    - name: Upload Debug file
+      uses: actions/upload-artifact@v4
+      with:
+        name: ".env"
+        path: ./.env
+
+    - name: Create config directory
+      run: test -d conf.d || mkdir -p conf.d
+
+    - name: Create config directory (asterisk)
+      run: test -d conf.d/asterisk || mkdir -p conf.d/asterisk
+
+    - name: Create config directory (systemd)
+      run: test -d conf.d/systemd/system || mkdir -p conf.d/systemd/system
+
+    - name: Create null config (asterisk)
+      run: touch conf.d/asterisk/{pjsip.conf,extensions.conf,rtp.conf}
+
+    - name: Print the Orchestration config
+      run: docker compose config | tee orchestration-config.yml
+
+    - run: tree
+
+    - name: Upload Debug file
+      uses: actions/upload-artifact@v4
+      with:
+        name: "orchestration-config.yml"
+        path: ./orchestration-config.yml
+
+    - name: Build check the Orchestration config
+      run: docker compose build --no-cache --check
+
+    - name: Build the Image
+      run: docker compose build --no-cache | tee orchestration-build.log
+
+    - name: Upload Debug file
+      uses: actions/upload-artifact@v4
+      with:
+        name: "orchestration-build.log"
+        path: ./orchestration-build.log
+
+    - name: Test run
+      run: docker compose up -t 60 -d --timestamps &
+
+    - run: sleep 30
+
+    - run: docker compose exec -it asterisk-core pwd
+    - run: docker compose exec -it asterisk-core ls -lh
+    - run: docker compose exec -it asterisk-core tree
+    - run: docker compose exec -it asterisk-core ls -lh /etc
+    - run: docker compose exec -it asterisk-core tree /etc
+    - run: docker compose exec -it asterisk-core ls -lh /etc/asterisk
+    - run: docker compose exec -it asterisk-core tree /etc/asterisk
+
+    - run: pwd;
+      if: always()
+    
+    - run: tree
+      if: always()
+
+    - name: Wait 5s
+      if: always()
+      run: sleep 5
+
+    - run: docker compose ps | tee orchestration-processes.log
+      if: always()
+
+    - name: Upload Debug file
+      uses: actions/upload-artifact@v4
+      with:
+        name: "orchestration-processes.log"
+        path: ./orchestration-processes.log
+      if: always()
+
+    - name: Print logs
+      if: always()
+      run: docker compose logs | tee orchestration-initrun.log
+
+    - name: Upload Debug file
+      uses: actions/upload-artifact@v4
+      with:
+        name: "orchestration-initrun.log"
+        path: ./orchestration-initrun.log
+      if: always()

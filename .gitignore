@@ -14,6 +14,7 @@ backup/
 *.db
 *.sqlite
 *.sqlite3
+conf.d/asterisk/
 
 # Shortcut link files
 *.lnk
