@@ -45,3 +45,6 @@ RUN make -j4;
 RUN make install;
 RUN make samples;
 RUN for i in {0..9}; do echo ''; done
+
+# サービス化
+RUN useradd asterisk -s /sbin/nologin
