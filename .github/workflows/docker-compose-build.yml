@@ -26,6 +26,9 @@ jobs:
     - name: Create test .env
       run: touch .env
 
+    - name: Create config directory
+      run: mkdir conf.d
+
     - name: Build the Image
       run: docker compose build --no-cache
 
