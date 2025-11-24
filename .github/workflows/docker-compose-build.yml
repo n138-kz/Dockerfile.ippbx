@@ -35,6 +35,9 @@ jobs:
     - name: Print the Orchestration config
       run: docker compose config
 
+    - name: Build check the Orchestration config
+      run: docker compose build --no-cache --check
+
     - name: Build the Image
       run: docker compose build --no-cache
 
