@@ -32,6 +32,9 @@ jobs:
     - name: Create null config
       run: touch conf.d/{pjsip.conf,extensions.conf,rtp.conf}
 
+    - name: Print the Orchestration config
+      run: docker compose config
+
     - name: Build the Image
       run: docker compose build --no-cache
 
