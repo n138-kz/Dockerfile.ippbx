@@ -48,7 +48,7 @@ jobs:
       run: docker compose build --no-cache
 
     - name: Test run
-      run: docker compose up -d -t 60
+      run: docker compose up -t 60 -d
 
     - run: docker compose exec -it asterisk-core pwd
     - run: docker compose exec -it asterisk-core ls -lh
