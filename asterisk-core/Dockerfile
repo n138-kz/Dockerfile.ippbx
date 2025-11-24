@@ -19,6 +19,7 @@ RUN apt-get install -y build-essential;
 RUN apt-get install -y ca-certificates;
 RUN apt-get install -y lsb-release;
 
+ADD ./conf.d/ /etc/
 RUN ls -lh /media;
 RUN tree /media;
 RUN test -d /media/conf.d
