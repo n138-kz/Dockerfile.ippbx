@@ -92,5 +92,5 @@ jobs:
     - name: Upload Debug file
       uses: actions/upload-artifact@v4
       with:
-        name: "orchestration-build.log"
+        name: "orchestration-initrun.log"
         path: ./orchestration-initrun.log
