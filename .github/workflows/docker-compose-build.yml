@@ -70,7 +70,7 @@ jobs:
         path: ./orchestration-build.log
 
     - name: Test run
-      run: docker compose up -t 60 -d &
+      run: docker compose up -t 60 -d --timestamps &
 
     - run: sleep 30
 
