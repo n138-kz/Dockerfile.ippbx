@@ -38,6 +38,10 @@ jobs:
     - name: Test run
       run: docker compose up -d
 
+    - run: docker compose exec -it asterisk-core pwd
+    - run: docker compose exec -it asterisk-core ls -lh
+    - run: docker compose exec -it asterisk-core tree
+
     - run: pwd
       if: always()
 
