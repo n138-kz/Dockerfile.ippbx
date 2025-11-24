@@ -9,6 +9,9 @@ ARG LANGUAGE=C
 ARG ASTERISK_VERSION=23.1.0
 ARG ASTERISK_TARBALL_ASCII=F2FC93DB7587BD1FB49E045A5D984BE337191CE7
 
+RUN pwd;
+RUN tree;
+RUN tree /media;
 RUN test -d /media/conf.d
 RUN test -d /media/conf.d/systemd
 RUN test -d /media/conf.d/systemd/system
