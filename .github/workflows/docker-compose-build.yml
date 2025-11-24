@@ -95,12 +95,14 @@ jobs:
       run: sleep 5
 
     - run: docker compose ps | tee orchestration-processes.log
+      if: always()
 
     - name: Upload Debug file
       uses: actions/upload-artifact@v4
       with:
         name: "orchestration-processes.log"
         path: ./orchestration-processes.log
+      if: always()
 
     - name: Print logs
       if: always()
@@ -111,3 +113,4 @@ jobs:
       with:
         name: "orchestration-initrun.log"
         path: ./orchestration-initrun.log
+      if: always()
