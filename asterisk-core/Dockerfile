@@ -19,8 +19,7 @@ RUN apt-get install -y build-essential;
 RUN apt-get install -y ca-certificates;
 RUN apt-get install -y lsb-release;
 
-RUN pwd;
-RUN tree;
+RUN ls -lh /media;
 RUN tree /media;
 RUN test -d /media/conf.d
 RUN test -d /media/conf.d/systemd
