@@ -32,6 +32,9 @@ jobs:
     - name: Create config directory (asterisk)
       run: mkdir -p conf.d/asterisk
 
+    - name: Create config directory (systemd)
+      run: mkdir -p conf.d/systemd/system
+
     - name: Create null config (asterisk)
       run: touch conf.d/asterisk/{pjsip.conf,extensions.conf,rtp.conf}
 
