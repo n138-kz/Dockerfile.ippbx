@@ -84,7 +84,7 @@ jobs:
     - run: docker compose exec -it asterisk-core ls -lh /etc/asterisk
     - run: docker compose exec -it asterisk-core tree /etc/asterisk
 
-    - run: pwd
+    - run: pwd;
       if: always()
 
     - name: Wait 5s
